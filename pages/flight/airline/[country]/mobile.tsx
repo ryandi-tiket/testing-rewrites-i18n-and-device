@@ -3,9 +3,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import type { ParsedUrlQuery } from 'querystring'
 import { Layout } from '@vercel/examples-ui'
-import { Dictionary } from '../../types'
-import map from '../../public/map.svg'
-import api from '../../api'
+import { Dictionary } from '../../../../types'
+import map from '../../../../public/map.svg'
+import api from '../../../../api'
 
 interface Params extends ParsedUrlQuery {
   country: string
@@ -26,7 +26,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps<unknown, Params> = async ({
-  params: { country, locale },
+  locale,
+  params: { country },
 }) => {
   // Get dictionary
   const dictionary = await api.dictionaries.fetch(locale)
@@ -58,7 +59,9 @@ export default function CountryPage({ country, locale, dictionary }: Props) {
       </div>
       <main className="flex flex-col items-center flex-1 px-4 sm:px-20 text-center z-10 pt-8 sm:pt-20">
         <header className="mb-12 flex flex-col items-center justify-center">
-          <h1 className="text-3xl sm:text-5xl font-bold">{dictionary.title}</h1>
+          <h1 className="text-3xl sm:text-5xl font-bold">
+            {dictionary.title} Mobile
+          </h1>
           <p className="mt-4 sm:text-xl text-lg text-gray-700">
             {dictionary.subtitle}
           </p>
